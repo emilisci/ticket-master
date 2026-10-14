@@ -30,3 +30,5 @@ Argumentas 2: Laravel jau moku, nereikės mokytis naujo karkaso.
 Didžiausia rizika: Filament nemoku.
 
 Atsarginis planas: darbuotojo puslapius daryti su paprastu Blade.
+
+Iškilo klausimas: kaip architektūriškai dėlioti users table: atskirai adminus ir vartotojus, ar kartu, išskiriant tik per rolę.
