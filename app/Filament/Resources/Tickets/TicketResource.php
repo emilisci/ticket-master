@@ -56,6 +56,22 @@ class TicketResource extends Resource
         ];
     }
 
+    /**
+     * Employees may only ever see their own tickets.
+     */
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        $user = auth()->user();
+
+        if (! $user->canManageTickets()) {
+            $query->whereBelongsTo($user);
+        }
+
+        return $query;
+    }
+
     public static function getRecordRouteBindingEloquentQuery(): Builder
     {
         return parent::getRecordRouteBindingEloquentQuery()

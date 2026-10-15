@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('status')->default('open'); // open, closed, in_progress
             $table->string('priority')->default('medium'); // low, medium, high
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('admin_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('admin_id')->nullable()->constrained('users')->nullOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

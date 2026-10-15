@@ -50,6 +50,11 @@ class User extends Authenticatable implements FilamentUser
         return $this->role === UserRole::Superadmin;
     }
 
+    public function canManageTickets(): bool
+    {
+        return in_array($this->role, [UserRole::Admin, UserRole::Superadmin], true);
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         return true;

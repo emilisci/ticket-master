@@ -29,7 +29,8 @@ class TicketInfolist
                         TextEntry::make('user.name')
                             ->label('User'),
                         TextEntry::make('admin.name')
-                            ->label('Admin'),
+                            ->label('Admin')
+                            ->placeholder('Unassigned'),
                         TextEntry::make('created_at')
                             ->dateTime(),
                         TextEntry::make('updated_at')

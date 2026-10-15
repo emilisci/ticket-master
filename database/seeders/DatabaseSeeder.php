@@ -21,16 +21,18 @@ class DatabaseSeeder extends Seeder
             'email' => 'superadmin@example.com',
         ]);
 
-        User::factory()->admin()->create([
+        $admin = User::factory()->admin()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
         ]);
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'User',
             'email' => 'user@example.com',
         ]);
 
-        Ticket::factory(10)->create();
+        Ticket::factory(3)->for($user)->for($admin, 'admin')->create();
+        Ticket::factory(2)->for($user)->create(['admin_id' => null]);
+        Ticket::factory(5)->for($admin, 'admin')->create();
     }
 }

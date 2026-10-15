@@ -16,6 +16,8 @@ class TicketForm
 {
     public static function configure(Schema $schema): Schema
     {
+        $canManageTickets = fn (): bool => auth()->user()->canManageTickets();
+
         return $schema
             ->components([
                 Section::make('Ticket')
@@ -33,7 +35,8 @@ class TicketForm
                         Select::make('status')
                             ->options(TicketStatus::class)
                             ->default(TicketStatus::Open)
-                            ->required(),
+                            ->required()
+                            ->visible($canManageTickets),
                         Select::make('priority')
                             ->options(TicketPriority::class)
                             ->default(TicketPriority::Medium)
@@ -43,7 +46,8 @@ class TicketForm
                             ->relationship(name: 'user', titleAttribute: 'name')
                             ->searchable()
                             ->preload()
-                            ->required(),
+                            ->required()
+                            ->visible($canManageTickets),
                         Select::make('admin_id')
                             ->label('Admin')
                             ->relationship(
@@ -53,7 +57,8 @@ class TicketForm
                             )
                             ->searchable()
                             ->preload()
-                            ->required(),
+                            ->placeholder('Unassigned')
+                            ->visible($canManageTickets),
                     ])
                     ->columns(2)
                     ->columnSpanFull(),
