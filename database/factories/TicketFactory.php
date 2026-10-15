@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\TicketPriority;
+use App\Enums\TicketStatus;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,10 +23,10 @@ class TicketFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'status' => $this->faker->randomElement(['open', 'closed', 'in_progress']),
-            'priority' => $this->faker->randomElement(['low', 'medium', 'high']),
+            'status' => $this->faker->randomElement(TicketStatus::cases()),
+            'priority' => $this->faker->randomElement(TicketPriority::cases()),
             'user_id' => User::factory(),
-            'admin_id' => User::factory(),
+            'admin_id' => User::factory()->admin(),
         ];
     }
 }

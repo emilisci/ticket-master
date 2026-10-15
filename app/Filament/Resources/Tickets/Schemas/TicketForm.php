@@ -2,7 +2,15 @@
 
 namespace App\Filament\Resources\Tickets\Schemas;
 
+use App\Enums\TicketPriority;
+use App\Enums\TicketStatus;
+use App\Enums\UserRole;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Builder;
 
 class TicketForm
 {
@@ -10,7 +18,45 @@ class TicketForm
     {
         return $schema
             ->components([
-                //
+                Section::make('Ticket')
+                    ->schema([
+                        TextInput::make('title')
+                            ->required()
+                            ->maxLength(255),
+                        Textarea::make('description')
+                            ->required()
+                            ->rows(6),
+                    ])
+                    ->columnSpanFull(),
+                Section::make('Details')
+                    ->schema([
+                        Select::make('status')
+                            ->options(TicketStatus::class)
+                            ->default(TicketStatus::Open)
+                            ->required(),
+                        Select::make('priority')
+                            ->options(TicketPriority::class)
+                            ->default(TicketPriority::Medium)
+                            ->required(),
+                        Select::make('user_id')
+                            ->label('User')
+                            ->relationship(name: 'user', titleAttribute: 'name')
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                        Select::make('admin_id')
+                            ->label('Admin')
+                            ->relationship(
+                                name: 'admin',
+                                titleAttribute: 'name',
+                                modifyQueryUsing: fn (Builder $query): Builder => $query->whereIn('role', [UserRole::Admin, UserRole::Superadmin]),
+                            )
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+                    ])
+                    ->columns(2)
+                    ->columnSpanFull(),
             ]);
     }
 }

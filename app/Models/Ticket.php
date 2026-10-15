@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\TicketPriority;
+use App\Enums\TicketStatus;
 use Database\Factories\TicketFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +23,19 @@ class Ticket extends Model
         'user_id',
         'admin_id',
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'status' => TicketStatus::class,
+            'priority' => TicketPriority::class,
+        ];
+    }
 
     /**
      * @return BelongsTo<User, $this>
