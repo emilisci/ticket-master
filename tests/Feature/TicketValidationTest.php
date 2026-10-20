@@ -8,6 +8,7 @@ use App\Filament\Resources\Tickets\Pages\CreateTicket;
 use App\Filament\Resources\Tickets\Pages\EditTicket;
 use App\Models\Ticket;
 use App\Models\User;
+use Database\Factories\TicketFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -96,6 +97,30 @@ class TicketValidationTest extends TestCase
                 ...$this->validTicketData(),
                 'title' => 'Klaida 1000000 kabinete 204',
             ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+    }
+
+    /**
+     * @return array<string, array{array{title: string, description: string, category: TicketCategory, priority: TicketPriority}}>
+     */
+    public static function sampleTickets(): array
+    {
+        return collect(TicketFactory::SAMPLE_TICKETS)
+            ->mapWithKeys(fn (array $sampleTicket): array => [$sampleTicket['title'] => [$sampleTicket]])
+            ->all();
+    }
+
+    /**
+     * @param  array{title: string, description: string, category: TicketCategory, priority: TicketPriority}  $sampleTicket
+     */
+    #[DataProvider('sampleTickets')]
+    public function test_factory_sample_ticket_passes_form_validation(array $sampleTicket): void
+    {
+        $this->actingAs(User::factory()->create());
+
+        Livewire::test(CreateTicket::class)
+            ->fillForm($sampleTicket)
             ->call('create')
             ->assertHasNoFormErrors();
     }
