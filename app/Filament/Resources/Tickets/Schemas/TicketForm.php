@@ -6,6 +6,7 @@ use App\Enums\TicketCategory;
 use App\Enums\TicketPriority;
 use App\Enums\TicketStatus;
 use App\Enums\UserRole;
+use App\Rules\MeaningfulText;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -25,9 +26,14 @@ class TicketForm
                     ->schema([
                         TextInput::make('title')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(150)
+                            ->rule(new MeaningfulText(minLength: 5))
+                            ->dehydrateStateUsing(fn (?string $state): ?string => $state === null ? null : trim($state)),
                         Textarea::make('description')
                             ->required()
+                            ->maxLength(5000)
+                            ->rule(new MeaningfulText(minLength: 10))
+                            ->dehydrateStateUsing(fn (?string $state): ?string => $state === null ? null : trim($state))
                             ->rows(6),
                     ])
                     ->columnSpanFull(),
