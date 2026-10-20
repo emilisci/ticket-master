@@ -33,6 +33,6 @@ class DatabaseSeeder extends Seeder
 
         Ticket::factory(3)->for($user)->for($admin, 'admin')->create();
         Ticket::factory(2)->for($user)->create(['admin_id' => null]);
-        Ticket::factory(5)->for($admin, 'admin')->create();
+        Ticket::factory(500)->for($admin, 'admin')->create();
     }
 }

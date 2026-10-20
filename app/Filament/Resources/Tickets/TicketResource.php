@@ -57,19 +57,11 @@ class TicketResource extends Resource
     }
 
     /**
-     * Employees may only ever see their own tickets.
+     * Scopes every ticket query (list and record pages) to what the current user may see.
      */
     public static function getEloquentQuery(): Builder
     {
-        $query = parent::getEloquentQuery();
-
-        $user = auth()->user();
-
-        if (! $user->canManageTickets()) {
-            $query->whereBelongsTo($user);
-        }
-
-        return $query;
+        return parent::getEloquentQuery()->visibleTo(auth()->user());
     }
 
     public static function getRecordRouteBindingEloquentQuery(): Builder

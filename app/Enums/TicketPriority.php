@@ -20,6 +20,18 @@ enum TicketPriority: string implements HasColor, HasLabel
         };
     }
 
+    /**
+     * Numeric weight used to sort tickets by urgency, since the stored values do not sort naturally.
+     */
+    public function weight(): int
+    {
+        return match ($this) {
+            self::Low => 1,
+            self::Medium => 2,
+            self::High => 3,
+        };
+    }
+
     public function getColor(): string
     {
         return match ($this) {

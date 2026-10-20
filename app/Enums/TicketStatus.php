@@ -7,25 +7,31 @@ use Filament\Support\Contracts\HasLabel;
 
 enum TicketStatus: string implements HasColor, HasLabel
 {
-    case Open = 'open';
+    case New = 'new';
     case InProgress = 'in_progress';
+    case Waiting = 'waiting';
+    case Resolved = 'resolved';
     case Closed = 'closed';
 
     public function getLabel(): string
     {
         return match ($this) {
-            self::Open => 'Atidarytas',
-            self::InProgress => 'Vykdomas',
-            self::Closed => 'Uždarytas',
+            self::New => 'Nauja',
+            self::InProgress => 'Vykdoma',
+            self::Waiting => 'Laukiama',
+            self::Resolved => 'Išspręsta',
+            self::Closed => 'Uždaryta',
         };
     }
 
     public function getColor(): string
     {
         return match ($this) {
-            self::Open => 'info',
-            self::InProgress => 'warning',
-            self::Closed => 'success',
+            self::New => 'info',
+            self::InProgress => 'primary',
+            self::Waiting => 'warning',
+            self::Resolved => 'success',
+            self::Closed => 'gray',
         };
     }
 }

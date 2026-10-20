@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Tickets\Schemas;
 
+use App\Enums\TicketCategory;
 use App\Enums\TicketPriority;
 use App\Enums\TicketStatus;
 use App\Enums\UserRole;
@@ -34,9 +35,12 @@ class TicketForm
                     ->schema([
                         Select::make('status')
                             ->options(TicketStatus::class)
-                            ->default(TicketStatus::Open)
+                            ->default(TicketStatus::New)
                             ->required()
                             ->visible($canManageTickets),
+                        Select::make('category')
+                            ->options(TicketCategory::class)
+                            ->required(),
                         Select::make('priority')
                             ->options(TicketPriority::class)
                             ->default(TicketPriority::Medium)
@@ -58,7 +62,8 @@ class TicketForm
                             ->searchable()
                             ->preload()
                             ->placeholder('Unassigned')
-                            ->visible($canManageTickets),
+                            ->visible($canManageTickets)
+                            ->disabled(fn (): bool => ! auth()->user()->isSuperadmin()),
                     ])
                     ->columns(2)
                     ->columnSpanFull(),

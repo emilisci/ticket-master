@@ -14,7 +14,7 @@ class TicketPolicy
 
     public function view(User $user, Ticket $ticket): bool
     {
-        return $user->canManageTickets() || $ticket->user()->is($user);
+        return $ticket->isVisibleTo($user);
     }
 
     public function create(User $user): bool
@@ -24,12 +24,20 @@ class TicketPolicy
 
     public function update(User $user, Ticket $ticket): bool
     {
-        return $user->canManageTickets();
+        return $user->canManageTickets() && $ticket->isVisibleTo($user);
+    }
+
+    /**
+     * Only superadmins decide which admin is responsible for a ticket.
+     */
+    public function assign(User $user, Ticket $ticket): bool
+    {
+        return $user->isSuperadmin();
     }
 
     public function delete(User $user, Ticket $ticket): bool
     {
-        return $user->canManageTickets();
+        return $user->canManageTickets() && $ticket->isVisibleTo($user);
     }
 
     public function deleteAny(User $user): bool
@@ -39,7 +47,7 @@ class TicketPolicy
 
     public function restore(User $user, Ticket $ticket): bool
     {
-        return $user->canManageTickets();
+        return $user->canManageTickets() && $ticket->isVisibleTo($user);
     }
 
     public function restoreAny(User $user): bool

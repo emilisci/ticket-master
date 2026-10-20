@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Enums\TicketCategory;
 use App\Enums\TicketPriority;
 use App\Enums\TicketStatus;
+use App\Filament\Resources\Tickets\Pages\CreateTicket;
 use App\Filament\Resources\Tickets\Pages\EditTicket;
 use App\Filament\Resources\Tickets\Pages\ViewTicket;
 use App\Models\Ticket;
@@ -57,7 +59,7 @@ class TicketResourceTest extends TestCase
 
     public function test_ticket_can_be_updated(): void
     {
-        $ticket = Ticket::factory()->create(['status' => TicketStatus::Open]);
+        $ticket = Ticket::factory()->create(['status' => TicketStatus::New]);
         $newAdmin = User::factory()->admin()->create();
 
         Livewire::test(EditTicket::class, ['record' => $ticket->id])
@@ -78,6 +80,25 @@ class TicketResourceTest extends TestCase
             'priority' => TicketPriority::Low->value,
             'admin_id' => $newAdmin->id,
         ]);
+    }
+
+    public function test_submitting_create_form_twice_creates_only_one_ticket(): void
+    {
+        $employee = User::factory()->create();
+
+        $this->actingAs($employee);
+
+        Livewire::test(CreateTicket::class)
+            ->fillForm([
+                'title' => 'Double clicked',
+                'description' => 'The create button was pressed twice.',
+                'category' => TicketCategory::Other,
+                'priority' => TicketPriority::Low,
+            ])
+            ->call('create')
+            ->call('create');
+
+        $this->assertDatabaseCount(Ticket::class, 1);
     }
 
     public function test_regular_user_cannot_be_assigned_as_admin(): void

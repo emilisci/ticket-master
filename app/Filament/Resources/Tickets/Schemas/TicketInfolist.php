@@ -22,6 +22,7 @@ class TicketInfolist
                     ->columnSpanFull(),
                 Section::make('Details')
                     ->schema([
+                        TextEntry::make('category'),
                         TextEntry::make('status')
                             ->badge(),
                         TextEntry::make('priority')
