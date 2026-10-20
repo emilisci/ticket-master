@@ -38,6 +38,7 @@ class TicketValidationTest extends TestCase
     {
         return [
             'title is missing' => [['title' => null], 'title'],
+            'title is an empty string' => [['title' => ''], 'title'],
             'title is only spaces' => [['title' => '        '], 'title'],
             'title is too short' => [['title' => 'Abc'], 'title'],
             'title is too short once trimmed' => [['title' => '   Ab     '], 'title'],

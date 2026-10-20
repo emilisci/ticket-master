@@ -42,6 +42,14 @@ class TicketAccessTest extends TestCase
             ->assertNotFound();
     }
 
+    public function test_missing_ticket_shows_not_found_page(): void
+    {
+        $this->actingAs(User::factory()->superadmin()->create());
+
+        $this->get(route('filament.admin.resources.tickets.view', 999))->assertNotFound()->assertSee('Not Found');
+        $this->get(route('filament.admin.resources.tickets.edit', 999))->assertNotFound()->assertSee('Not Found');
+    }
+
     public function test_employee_can_view_but_not_edit_own_ticket(): void
     {
         $employee = User::factory()->create();
