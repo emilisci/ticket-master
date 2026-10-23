@@ -13,6 +13,21 @@ use Filament\Notifications\Notification;
 class TicketObserver
 {
     /**
+     * Keep resolved_at in sync with the status, wherever the status is changed from.
+     * The first resolution time is kept when a resolved ticket is later closed.
+     */
+    public function saving(Ticket $ticket): void
+    {
+        if ($ticket->status?->isResolved()) {
+            $ticket->resolved_at ??= now();
+
+            return;
+        }
+
+        $ticket->resolved_at = null;
+    }
+
+    /**
      * Let the employee who submitted the ticket know when staff act on it (US-2).
      */
     public function updated(Ticket $ticket): void

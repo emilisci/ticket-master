@@ -50,6 +50,16 @@
     "View ticket": "Peržiūrėti užklausą",
     "No longer assigned to anyone": "Užklausa nebėra niekam priskirta",
 
+    "Tickets created": "Sukurtos užklausos",
+    "Tickets resolved": "Išspręstos užklausos",
+    "Created and resolved tickets": "Sukurtos ir išspręstos užklausos",
+    "Resolved at": "Išsprendimo data",
+    "All tickets": "Visos užklausos",
+    "Tickets assigned to you": "Jums priskirtos užklausos",
+    "Last 7 days": "Paskutinės 7 dienos",
+    "Last 30 days": "Paskutinės 30 dienų",
+    "Last 90 days": "Paskutinės 90 dienų",
+
     "The :attribute must be text.": "Laukas „:attribute“ turi būti tekstas.",
     "The :attribute must be at least :min characters long.": "Simbolių skaičius lauke „:attribute“ turi būti ne mažesnis nei :min.",
     "The :attribute must contain letters, not only numbers or symbols.": "Lauke „:attribute“ turi būti raidžių, ne vien skaičiai ar simboliai.",

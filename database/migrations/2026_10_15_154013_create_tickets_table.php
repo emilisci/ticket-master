@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('priority')->default('medium'); // low, medium, high
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('admin_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->timestamp('resolved_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

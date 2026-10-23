@@ -43,6 +43,7 @@ class Ticket extends Model
             'category' => TicketCategory::class,
             'status' => TicketStatus::class,
             'priority' => TicketPriority::class,
+            'resolved_at' => 'datetime',
         ];
     }
 

@@ -155,6 +155,18 @@ class TicketFactory extends Factory
     ];
 
     /**
+     * Resolved tickets get a resolution time between their creation and now, instead of "now".
+     */
+    public function configure(): static
+    {
+        return $this->afterMaking(function (Ticket $ticket): void {
+            if ($ticket->status->isResolved() && $ticket->resolved_at === null) {
+                $ticket->resolved_at = $this->faker->dateTimeBetween($ticket->created_at ?? 'now');
+            }
+        });
+    }
+
+    /**
      * Define the model's default state.
      *
      * @return array<string, mixed>

@@ -43,6 +43,10 @@ class TicketInfolist
                         TextEntry::make('updated_at')
                             ->label(__('Updated at'))
                             ->dateTime(),
+                        TextEntry::make('resolved_at')
+                            ->label(__('Resolved at'))
+                            ->dateTime()
+                            ->visible(fn (Ticket $record): bool => $record->resolved_at !== null),
                         TextEntry::make('deleted_at')
                             ->label(__('Deleted at'))
                             ->dateTime()

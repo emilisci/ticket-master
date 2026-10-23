@@ -31,8 +31,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@example.com',
         ]);
 
-        Ticket::factory(3)->for($user)->for($admin, 'admin')->create();
-        Ticket::factory(2)->for($user)->create(['admin_id' => null]);
-        Ticket::factory(50)->for($admin, 'admin')->create();
+        $createdDuringLastMonth = function (): array {
+            $createdAt = fake()->dateTimeBetween('-30 days');
+
+            return ['created_at' => $createdAt, 'updated_at' => $createdAt];
+        };
+
+        Ticket::factory(3)->for($user)->for($admin, 'admin')->state($createdDuringLastMonth)->create();
+        Ticket::factory(2)->for($user)->state($createdDuringLastMonth)->create(['admin_id' => null]);
+        Ticket::factory(50)->for($admin, 'admin')->state($createdDuringLastMonth)->create();
     }
 }

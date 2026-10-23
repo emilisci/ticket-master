@@ -57,6 +57,12 @@ class TicketsTable
                     ->label(__('Created at'))
                     ->dateTime()
                     ->sortable(),
+                TextColumn::make('resolved_at')
+                    ->label(__('Resolved at'))
+                    ->dateTime()
+                    ->placeholder('—')
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('updated_at')
                     ->label(__('Updated at'))
                     ->dateTime()

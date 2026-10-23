@@ -24,6 +24,14 @@ enum TicketStatus: string implements HasColor, HasLabel
         };
     }
 
+    /**
+     * Whether a ticket in this status counts as solved (FR-8).
+     */
+    public function isResolved(): bool
+    {
+        return in_array($this, [self::Resolved, self::Closed], true);
+    }
+
     public function getColor(): string
     {
         return match ($this) {
