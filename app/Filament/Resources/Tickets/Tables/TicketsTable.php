@@ -32,27 +32,33 @@ class TicketsTable
         return $table
             ->columns([
                 TextColumn::make('title')
+                    ->label(__('Title'))
                     ->searchable()
                     ->description(fn (Ticket $record): string => Str::limit($record->description, 60))
                     ->wrap(),
-                TextColumn::make('category'),
+                TextColumn::make('category')
+                    ->label(__('Category')),
                 TextColumn::make('status')
+                    ->label(__('Status'))
                     ->badge()
                     ->sortable(),
                 TextColumn::make('priority')
+                    ->label(__('Priority'))
                     ->badge()
                     ->sortable(query: fn (Builder $query, string $direction): Builder => static::orderByPriority($query, $direction)),
                 TextColumn::make('user.name')
-                    ->label('User')
+                    ->label(__('Submitted by'))
                     ->searchable()
                     ->visible($canManageTickets),
                 TextColumn::make('admin.name')
-                    ->label('Admin')
-                    ->placeholder('Unassigned'),
+                    ->label(__('Assigned admin'))
+                    ->placeholder(__('Unassigned')),
                 TextColumn::make('created_at')
+                    ->label(__('Created at'))
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -60,16 +66,19 @@ class TicketsTable
             ->defaultSort('priority', 'desc')
             ->filters([
                 SelectFilter::make('status')
+                    ->label(__('Status'))
                     ->options(TicketStatus::class)
                     ->multiple(),
                 SelectFilter::make('priority')
+                    ->label(__('Priority'))
                     ->options(TicketPriority::class)
                     ->multiple(),
                 SelectFilter::make('category')
+                    ->label(__('Category'))
                     ->options(TicketCategory::class)
                     ->multiple(),
                 SelectFilter::make('admin')
-                    ->label('Admin')
+                    ->label(__('Assigned admin'))
                     ->relationship(
                         name: 'admin',
                         titleAttribute: 'name',
@@ -79,7 +88,7 @@ class TicketsTable
                     ->preload()
                     ->visible($isSuperadmin),
                 Filter::make('unassigned')
-                    ->label('Unassigned only')
+                    ->label(__('Unassigned only'))
                     ->query(fn (Builder $query): Builder => $query->whereNull('admin_id'))
                     ->toggle()
                     ->visible($isSuperadmin),

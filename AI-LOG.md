@@ -31,6 +31,8 @@ Data — Problema — Kaip naudotas DI — Ką pasiūlė — Ką priėmiau / pak
 
 2026-10-21 — Reikėjo 10 unit testų — Paprašiau DI paprastų testų (kūrimas, peržiūra, trynimas ir pan.) — 10 TicketPolicy testų be duomenų bazės: ką gali darbuotojas, admin ir superadmin — Priėmiau.
 
+2026-10-23 - Pridėta lietuvių vertimai ir testai
+
 Mano taisyklės sau
 
 - Rašau tik REIKŠMINGUS atvejus (ne kiekvieną klausimą).

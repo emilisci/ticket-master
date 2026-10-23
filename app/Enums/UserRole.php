@@ -13,9 +13,9 @@ enum UserRole: string implements HasLabel
     public function getLabel(): string
     {
         return match ($this) {
-            self::Superadmin => 'Superadmin',
-            self::Admin => 'Administratorius',
-            self::User => 'Naudotojas',
+            self::Superadmin => __('Superadmin'),
+            self::Admin => __('Admin'),
+            self::User => __('User'),
         };
     }
 }

@@ -13,30 +13,38 @@ class TicketInfolist
     {
         return $schema
             ->components([
-                Section::make('Ticket')
+                Section::make(__('Ticket'))
                     ->schema([
-                        TextEntry::make('title'),
+                        TextEntry::make('title')
+                            ->label(__('Title')),
                         TextEntry::make('description')
+                            ->label(__('Description'))
                             ->prose(),
                     ])
                     ->columnSpanFull(),
-                Section::make('Details')
+                Section::make(__('Details'))
                     ->schema([
-                        TextEntry::make('category'),
+                        TextEntry::make('category')
+                            ->label(__('Category')),
                         TextEntry::make('status')
+                            ->label(__('Status'))
                             ->badge(),
                         TextEntry::make('priority')
+                            ->label(__('Priority'))
                             ->badge(),
                         TextEntry::make('user.name')
-                            ->label('User'),
+                            ->label(__('Submitted by')),
                         TextEntry::make('admin.name')
-                            ->label('Admin')
-                            ->placeholder('Unassigned'),
+                            ->label(__('Assigned admin'))
+                            ->placeholder(__('Unassigned')),
                         TextEntry::make('created_at')
+                            ->label(__('Created at'))
                             ->dateTime(),
                         TextEntry::make('updated_at')
+                            ->label(__('Updated at'))
                             ->dateTime(),
                         TextEntry::make('deleted_at')
+                            ->label(__('Deleted at'))
                             ->dateTime()
                             ->visible(fn (Ticket $record): bool => $record->trashed()),
                     ])

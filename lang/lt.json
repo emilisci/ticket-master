@@ -1,0 +1,66 @@
+{
+    "ticket": "užklausa",
+    "tickets": "užklausos",
+    "user": "naudotojas",
+    "users": "naudotojai",
+
+    "Ticket": "Užklausa",
+    "Details": "Informacija",
+    "Title": "Pavadinimas",
+    "Description": "Aprašymas",
+    "Category": "Kategorija",
+    "Status": "Būsena",
+    "Priority": "Prioritetas",
+    "Submitted by": "Pateikė",
+    "Assigned admin": "Atsakingas",
+    "Unassigned": "Nepriskirta",
+    "Unassigned only": "Tik nepriskirtos",
+    "Created at": "Sukurta",
+    "Updated at": "Atnaujinta",
+    "Deleted at": "Ištrinta",
+
+    "New": "Nauja",
+    "In progress": "Vykdoma",
+    "Waiting": "Laukiama",
+    "Resolved": "Išspręsta",
+    "Closed": "Uždaryta",
+
+    "Low": "Žemas",
+    "Medium": "Vidutinis",
+    "High": "Aukštas",
+
+    "Hardware": "Įranga",
+    "Software": "Programinė įranga",
+    "Accounts and access": "Prieigos ir paskyros",
+    "Network": "Tinklas",
+    "Other": "Kita",
+
+    "Superadmin": "Superadministratorius",
+    "Admin": "Administratorius",
+    "User": "Naudotojas",
+
+    "Name": "Vardas",
+    "Email address": "El. pašto adresas",
+    "Password": "Slaptažodis",
+    "Role": "Rolė",
+
+    "Assign to me": "Priskirti man",
+    "Ticket assigned to you": "Užklausa priskirta jums",
+    "Your ticket was updated": "Jūsų užklausa atnaujinta",
+    "View ticket": "Peržiūrėti užklausą",
+    "No longer assigned to anyone": "Užklausa nebėra niekam priskirta",
+
+    "The :attribute must be text.": "Laukas „:attribute“ turi būti tekstas.",
+    "The :attribute must be at least :min characters long.": "Simbolių skaičius lauke „:attribute“ turi būti ne mažesnis nei :min.",
+    "The :attribute must contain letters, not only numbers or symbols.": "Lauke „:attribute“ turi būti raidžių, ne vien skaičiai ar simboliai.",
+    "The :attribute must not repeat the same character so many times in a row.": "Lauke „:attribute“ tas pats simbolis kartojasi per daug kartų iš eilės.",
+
+    "Unauthorized": "Neprisijungta",
+    "Payment Required": "Reikalingas mokėjimas",
+    "Forbidden": "Prieiga draudžiama",
+    "Not Found": "Puslapis nerastas",
+    "Page Expired": "Puslapio galiojimas baigėsi",
+    "Too Many Requests": "Per daug bandymų",
+    "Server Error": "Serverio klaida",
+    "Service Unavailable": "Paslauga laikinai nepasiekiama"
+}

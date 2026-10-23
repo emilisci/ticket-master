@@ -16,11 +16,11 @@ enum TicketStatus: string implements HasColor, HasLabel
     public function getLabel(): string
     {
         return match ($this) {
-            self::New => 'Nauja',
-            self::InProgress => 'Vykdoma',
-            self::Waiting => 'Laukiama',
-            self::Resolved => 'Išspręsta',
-            self::Closed => 'Uždaryta',
+            self::New => __('New'),
+            self::InProgress => __('In progress'),
+            self::Waiting => __('Waiting'),
+            self::Resolved => __('Resolved'),
+            self::Closed => __('Closed'),
         };
     }
 

@@ -47,8 +47,8 @@ class TicketNotificationTest extends TestCase
 
         $notification = $this->employee->notifications->first()->data;
 
-        $this->assertSame('Your ticket was updated', $notification['title']);
-        $this->assertStringContainsString('Status: Nauja → Vykdoma', $notification['body']);
+        $this->assertSame('Jūsų užklausa atnaujinta', $notification['title']);
+        $this->assertStringContainsString('Būsena: Nauja → Vykdoma', $notification['body']);
         $this->assertSame(
             TicketResource::getUrl('view', ['record' => $ticket], panel: 'admin'),
             $notification['actions'][0]['url'],
@@ -66,7 +66,7 @@ class TicketNotificationTest extends TestCase
             ->callAction(TestAction::make('assignToMe')->table($ticket));
 
         $this->assertCount(1, $this->employee->notifications);
-        $this->assertStringContainsString('Assigned to: Vadovė Asta', $this->employee->notifications->first()->data['body']);
+        $this->assertStringContainsString('Atsakingas: Vadovė Asta', $this->employee->notifications->first()->data['body']);
     }
 
     public function test_several_changes_in_one_save_send_a_single_notification(): void
@@ -93,9 +93,9 @@ class TicketNotificationTest extends TestCase
 
         $body = $this->employee->notifications->first()->data['body'];
 
-        $this->assertStringContainsString('Status: Nauja → Laukiama', $body);
-        $this->assertStringContainsString('Priority: Žemas → Aukštas', $body);
-        $this->assertStringContainsString('Assigned to: Jonas Specialistas', $body);
+        $this->assertStringContainsString('Būsena: Nauja → Laukiama', $body);
+        $this->assertStringContainsString('Prioritetas: Žemas → Aukštas', $body);
+        $this->assertStringContainsString('Atsakingas: Jonas Specialistas', $body);
     }
 
     public function test_employee_is_not_notified_about_text_only_edits(): void

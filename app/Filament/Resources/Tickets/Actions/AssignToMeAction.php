@@ -17,7 +17,7 @@ class AssignToMeAction extends Action
     {
         parent::setUp();
 
-        $this->label('Assign to me');
+        $this->label(__('Assign to me'));
 
         $this->icon(Heroicon::OutlinedUserPlus);
 
@@ -27,7 +27,7 @@ class AssignToMeAction extends Action
 
         $this->hidden(fn (Ticket $record): bool => $record->admin()->is(auth()->user()));
 
-        $this->successNotificationTitle('Ticket assigned to you');
+        $this->successNotificationTitle(__('Ticket assigned to you'));
 
         $this->action(function (Ticket $record): void {
             $record->admin()->associate(auth()->user())->save();

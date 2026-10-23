@@ -28,13 +28,13 @@ class TicketObserver
         }
 
         Notification::make()
-            ->title('Your ticket was updated')
+            ->title(__('Your ticket was updated'))
             ->body(e($ticket->title).'<br>'.implode('<br>', $changes))
             ->icon('heroicon-o-ticket')
             ->info()
             ->actions([
                 Action::make('view')
-                    ->label('View ticket')
+                    ->label(__('View ticket'))
                     ->button()
                     ->url(TicketResource::getUrl('view', ['record' => $ticket], panel: 'admin'))
                     ->markAsRead(),
@@ -50,19 +50,19 @@ class TicketObserver
         $changes = [];
 
         if ($ticket->wasChanged('status')) {
-            $changes[] = $this->describeChange('Status', $ticket->getOriginal('status'), $ticket->status);
+            $changes[] = $this->describeChange(__('Status'), $ticket->getOriginal('status'), $ticket->status);
         }
 
         if ($ticket->wasChanged('priority')) {
-            $changes[] = $this->describeChange('Priority', $ticket->getOriginal('priority'), $ticket->priority);
+            $changes[] = $this->describeChange(__('Priority'), $ticket->getOriginal('priority'), $ticket->priority);
         }
 
         if ($ticket->wasChanged('admin_id')) {
             $admin = $ticket->admin()->first();
 
             $changes[] = $admin instanceof User
-                ? 'Assigned to: '.e($admin->name)
-                : 'No longer assigned to anyone';
+                ? __('Assigned admin').': '.e($admin->name)
+                : __('No longer assigned to anyone');
         }
 
         return $changes;

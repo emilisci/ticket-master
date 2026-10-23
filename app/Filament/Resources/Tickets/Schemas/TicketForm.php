@@ -22,14 +22,16 @@ class TicketForm
 
         return $schema
             ->components([
-                Section::make('Ticket')
+                Section::make(__('Ticket'))
                     ->schema([
                         TextInput::make('title')
+                            ->label(__('Title'))
                             ->required()
                             ->maxLength(150)
                             ->rule(new MeaningfulText(minLength: 5))
                             ->dehydrateStateUsing(fn (?string $state): ?string => $state === null ? null : trim($state)),
                         Textarea::make('description')
+                            ->label(__('Description'))
                             ->required()
                             ->maxLength(5000)
                             ->rule(new MeaningfulText(minLength: 10))
@@ -37,29 +39,32 @@ class TicketForm
                             ->rows(6),
                     ])
                     ->columnSpanFull(),
-                Section::make('Details')
+                Section::make(__('Details'))
                     ->schema([
                         Select::make('status')
+                            ->label(__('Status'))
                             ->options(TicketStatus::class)
                             ->default(TicketStatus::New)
                             ->required()
                             ->visible($canManageTickets),
                         Select::make('category')
+                            ->label(__('Category'))
                             ->options(TicketCategory::class)
                             ->required(),
                         Select::make('priority')
+                            ->label(__('Priority'))
                             ->options(TicketPriority::class)
                             ->default(TicketPriority::Medium)
                             ->required(),
                         Select::make('user_id')
-                            ->label('User')
+                            ->label(__('Submitted by'))
                             ->relationship(name: 'user', titleAttribute: 'name')
                             ->searchable()
                             ->preload()
                             ->required()
                             ->visible($canManageTickets),
                         Select::make('admin_id')
-                            ->label('Admin')
+                            ->label(__('Assigned admin'))
                             ->relationship(
                                 name: 'admin',
                                 titleAttribute: 'name',
@@ -67,7 +72,7 @@ class TicketForm
                             )
                             ->searchable()
                             ->preload()
-                            ->placeholder('Unassigned')
+                            ->placeholder(__('Unassigned'))
                             ->visible($canManageTickets)
                             ->disabled(fn (): bool => ! auth()->user()->isSuperadmin()),
                     ])

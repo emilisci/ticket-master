@@ -46,8 +46,8 @@ class TicketAccessTest extends TestCase
     {
         $this->actingAs(User::factory()->superadmin()->create());
 
-        $this->get(route('filament.admin.resources.tickets.view', 999))->assertNotFound()->assertSee('Not Found');
-        $this->get(route('filament.admin.resources.tickets.edit', 999))->assertNotFound()->assertSee('Not Found');
+        $this->get(route('filament.admin.resources.tickets.view', 999))->assertNotFound()->assertSee('Puslapis nerastas');
+        $this->get(route('filament.admin.resources.tickets.edit', 999))->assertNotFound()->assertSee('Puslapis nerastas');
     }
 
     public function test_employee_can_view_but_not_edit_own_ticket(): void

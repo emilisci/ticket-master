@@ -15,11 +15,11 @@ enum TicketCategory: string implements HasLabel
     public function getLabel(): string
     {
         return match ($this) {
-            self::Hardware => 'Įranga',
-            self::Software => 'Programinė įranga',
-            self::Access => 'Prieigos ir paskyros',
-            self::Network => 'Tinklas',
-            self::Other => 'Kita',
+            self::Hardware => __('Hardware'),
+            self::Software => __('Software'),
+            self::Access => __('Accounts and access'),
+            self::Network => __('Network'),
+            self::Other => __('Other'),
         };
     }
 }

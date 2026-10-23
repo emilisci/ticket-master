@@ -24,6 +24,16 @@ class TicketResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    public static function getModelLabel(): string
+    {
+        return __('ticket');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('tickets');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return TicketForm::configure($schema);
