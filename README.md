@@ -57,7 +57,13 @@ Lokaliam testavimui naudojama SQLite, todėl atskiro duomenų bazės serverio ne
 ## Paleidimas
 
 ```bash
-composer run dev
+composer run dev 
+```
+
+arba
+
+```bash
+php artisan serve
 ```
 
 Ši komanda vienu metu paleidžia web serverį, eilės (queue) darbuotoją ir Vite. Aplikacija pasiekiama adresu <http://localhost:8000>.
