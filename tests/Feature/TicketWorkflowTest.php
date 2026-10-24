@@ -110,6 +110,7 @@ class TicketWorkflowTest extends TestCase
         $mediumPriorityTicket = Ticket::factory()->create(['priority' => TicketPriority::Medium]);
 
         Livewire::test(ListTickets::class)
+            ->sortTable('priority', 'desc')
             ->assertCanSeeTableRecords([$highPriorityTicket, $mediumPriorityTicket, $lowPriorityTicket], inOrder: true);
     }
 }

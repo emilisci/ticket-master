@@ -161,7 +161,7 @@ class TicketFactory extends Factory
     {
         return $this->afterMaking(function (Ticket $ticket): void {
             if ($ticket->status->isResolved() && $ticket->resolved_at === null) {
-                $ticket->resolved_at = $this->faker->dateTimeBetween($ticket->created_at ?? 'now');
+                $ticket->resolved_at = $this->faker->dateTimeBetween($ticket->created_at ?? now(), now());
             }
         });
     }
