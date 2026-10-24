@@ -87,3 +87,5 @@ php artisan test     # testai
 composer run lint    # kodo formatavimas (Pint)
 composer run test    # Pint patikra, PHPStan ir testai
 ```
+
+Gynimui pasiruošta!
